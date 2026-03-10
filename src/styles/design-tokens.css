@@ -1,0 +1,95 @@
+/* GearvnWebV2 — Design Tokens */
+/* Source of truth for all CSS custom properties */
+/* See docs/design-system.md for full documentation */
+/* Update this file when Figma design system changes */
+
+:root {
+  /* ── Brand Colors ───────────────────────────── */
+  --color-primary: #E53935;
+  --color-primary-dark: #B71C1C;
+  --color-primary-light: #EF9A9A;
+
+  /* ── Surface ────────────────────────────────── */
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #F5F5F5;
+  --color-surface-muted: #EEEEEE;
+
+  /* ── Text ───────────────────────────────────── */
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #757575;
+  --color-text-disabled: #BDBDBD;
+  --color-text-inverse: #FFFFFF;
+
+  /* ── Border ─────────────────────────────────── */
+  --color-border: #E0E0E0;
+  --color-border-strong: #9E9E9E;
+
+  /* ── Semantic ───────────────────────────────── */
+  --color-success: #43A047;
+  --color-warning: #FB8C00;
+  --color-error: #E53935;
+  --color-info: #1E88E5;
+
+  /* ── Special ────────────────────────────────── */
+  --color-star: #FFC107;
+
+  /* ── Flash Sale (Figma node 66:393) ─────────── */
+  --color-flash-sale-outer-bg: #F5F5F5;       /* section bg */
+  --color-flash-sale-gradient-from: #FFD7C6;  /* container top */
+  --color-flash-sale-gradient-to: #FF4800;    /* container bottom */
+  --color-flash-sale-banner-from: #FFA983;    /* banner placeholder top */
+  --color-flash-sale-banner-to: #F54A00;      /* banner placeholder bottom */
+  --color-flash-badge-bg: #C10007;            /* fire badge bg */
+  --color-flash-badge-border: #FFA2A2;        /* fire badge border */
+  --color-flash-loadbar-track: #FFC9C9;       /* loadbar background */
+  --color-flash-discount-bg: #FFE2E2;         /* discount % badge bg */
+  --color-flash-discount-text: #E7000B;       /* discount % text */
+  --color-flash-price-sale: #C10007;          /* sale price color */
+  --color-flash-price-original: #737373;      /* original price strikethrough */
+
+  /* ── Navbar ─────────────────────────────────── */
+  /* Figma node 57:5163 — primary/700 */
+  --color-navbar-bg: #C10007;
+  --color-navbar-btn-menu: #9F0712;  /* bg_red_darker */
+  --color-navbar-btn-dark: #0A0A0A;  /* neutral/950 */
+  --color-navbar-text: #FFFFFF;
+
+  /* ── Surface Extended ───────────────────────── */
+  --color-surface-red-subtle: #FEF2F2;
+  --color-surface-dark: #1A1A1A;
+
+  /* ── Border Extended ────────────────────────── */
+  --color-border-light: #D4D4D4;
+
+  /* ── Text Extended ──────────────────────────── */
+  --color-text-figma-primary: #262626;
+  --color-link: #155DFC;              /* blue link / CTA text */
+  --color-tab-active: #9F0712;        /* active tab color (red/800) */
+
+  /* ── Product Card (Figma node 122:13288) ────────── */
+  --color-badge-primary-bg: #C10007;       /* Badge 1 bg — red solid */
+  --color-badge-primary-border: #FFA2A2;   /* Badge 1 border */
+  --color-badge-secondary-bg: #FFE2E2;     /* Badge 2 bg + discount badge bg */
+  --color-badge-secondary-text: #C10007;   /* Badge 2 text */
+  --color-spec-block-bg: #F5F5F5;          /* Specs block background */
+  --color-spec-chip-bg: #E5E5E5;           /* Spec chip background */
+  --color-spec-chip-text: #525252;         /* Spec chip text */
+  --color-discount-text: #E7000B;          /* Discount % text */
+  --color-voucher-green-bg: #F0FDF4;       /* Voucher 1 bg */
+  --color-voucher-green-text: #009966;     /* Voucher 1 text */
+  --color-voucher-orange-bg: #FFF7ED;      /* Voucher 2 bg */
+  --color-voucher-orange-text: #F54A00;    /* Voucher 2 text */
+  --color-star-score-text: #404040;        /* Star score text */
+
+  /* ── Border Radius ──────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ────────────────────────────────── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
