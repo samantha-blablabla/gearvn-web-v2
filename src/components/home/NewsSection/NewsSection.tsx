@@ -20,25 +20,25 @@ export interface NewsSectionProps {
 
 const DEFAULT_FEATURED: NewsArticle = {
   id: "featured-1",
-  title: "How to build a loyal community online and offline",
-  excerpt: "Khám phá những xu hướng công nghệ mới nhất và cách chúng thay đổi cuộc sống hàng ngày của chúng ta.",
-  imageUrl: "/assets/images/news/news-featured.jpg",
+  title: "RTX 5090 chính thức ra mắt — Hiệu năng gấp đôi thế hệ trước",
+  excerpt: "NVIDIA vừa trình làng dòng GPU GeForce RTX 5090 với kiến trúc Blackwell hoàn toàn mới, hứa hẹn hiệu năng gaming và AI vượt trội.",
+  imageUrl: "/assets/images/news/news-featured.svg",
   tag: "TechNews",
-  href: "/tin-tuc/how-to-build-a-loyal-community",
+  href: "/tin-tuc/rtx-5090-ra-mat",
 };
 
 const DEFAULT_RECENT: NewsArticle[] = [
   {
     id: "recent-1",
-    title: "How to optimize images in WordPress for faster loading (complete guide)",
-    imageUrl: "/assets/images/news/news-1.jpg",
-    href: "/tin-tuc/optimize-images-wordpress",
+    title: "Top 10 laptop gaming đáng mua nhất 2025 cho sinh viên",
+    imageUrl: "/assets/images/news/news-1.svg",
+    href: "/tin-tuc/top-10-laptop-gaming-2025",
   },
   {
     id: "recent-2",
-    title: "The unseen of spending three years at Pixelgrade",
-    imageUrl: "/assets/images/news/news-2.jpg",
-    href: "/tin-tuc/three-years-at-pixelgrade",
+    title: "So sánh AMD Ryzen 9 9950X vs Intel Core Ultra 9 285K — Ai mới là vua?",
+    imageUrl: "/assets/images/news/news-2.svg",
+    href: "/tin-tuc/so-sanh-ryzen-9-vs-intel-ultra-9",
   },
 ];
 
@@ -53,32 +53,23 @@ export function NewsSection({
     >
       <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px] flex flex-col gap-8">
         {/* Top banner */}
-        <div className="relative w-full h-[120px] md:h-[200px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)]">
+        <Link
+          href="/tin-tuc"
+          className="relative w-full h-[120px] md:h-[200px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)] block group"
+        >
           <Image
-            src="/assets/images/news/news-banner.png"
+            src="/assets/images/banners/news-top-banner.png"
             alt="Cập nhật Tin Tức Công Nghệ mới nhất cùng Gearvn"
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="(max-width: 1440px) 100vw, 1200px"
           />
-          <div className="absolute inset-0 flex items-center justify-between px-8 lg:px-[32px]">
-            <p className="text-white font-semibold text-[16px] lg:text-[20px] leading-[28px]">
-              Cập nhật <strong>Tin Tức Công Nghệ</strong> mới nhất cùng Gearvn
-            </p>
-            <Link
-              href="/tin-tuc"
-              className="flex items-center gap-1 text-white font-semibold text-[14px] lg:text-[16px] shrink-0 hover:underline"
-            >
-              Xem tất cả
-              <ChevronRight size={18} />
-            </Link>
-          </div>
-        </div>
+        </Link>
 
         {/* News grid */}
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-[16px] items-start">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-[24px] items-start">
           {/* Left: Tin Tức Nổi Bật */}
-          <div className="flex flex-col gap-4 flex-1 min-w-0">
+          <div className="flex flex-col gap-[16px] flex-1 min-w-0">
             <h2 className="text-[20px] lg:text-[24px] font-semibold leading-[28px] text-[var(--color-text-figma-primary)]">
               Tin Tức Nổi Bật
             </h2>
@@ -124,7 +115,7 @@ export function NewsSection({
           </div>
 
           {/* Right: Bài Viết Mới */}
-          <div className="flex flex-col gap-4 lg:w-[374px] shrink-0">
+          <div className="flex flex-col gap-[16px] lg:w-[374px] shrink-0">
             <h2 className="text-[20px] lg:text-[24px] font-semibold leading-[28px] text-[var(--color-text-figma-primary)]">
               Bài Viết Mới
             </h2>

@@ -40,28 +40,56 @@ export function FeaturedCategories({ className }: FeaturedCategoriesProps) {
     <section
       className={cn("bg-[var(--color-surface-subtle)] py-8 lg:py-[32px]", className)}
     >
-      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px]">
-        <div className="flex flex-col gap-4 items-start">
+      <div className="max-w-[1440px] mx-auto">
+        <div className="flex flex-col gap-4">
           {/* Section title */}
-          <h2 className="text-[18px] md:text-[20px] font-semibold leading-[26px] text-[var(--color-text-figma-primary)] whitespace-nowrap">
+          <h2 className="px-4 md:px-10 lg:px-[120px] text-[18px] md:text-[20px] font-semibold leading-[26px] text-[var(--color-text-figma-primary)] whitespace-nowrap">
             Danh Mục Nổi Bật
           </h2>
 
-          {/* Category grid */}
-          <div className="flex flex-wrap gap-2">
+          {/* Mobile: 2-row horizontal scroll, full-width (no side padding clip) */}
+          <div className="grid grid-rows-2 grid-flow-col gap-2 overflow-x-auto scrollbar-hide px-4 md:hidden">
+            {CATEGORIES.map((cat) => (
+              <Link
+                key={cat.slug}
+                href={`/${cat.slug}`}
+                className={cn(
+                  "flex flex-col items-center justify-center gap-2 shrink-0",
+                  "w-[90px] h-[110px]",
+                  "bg-[var(--color-surface)] border border-[#e5e5e5] rounded-[8px]",
+                  "px-2 py-4"
+                )}
+              >
+                <div className="relative size-[56px] overflow-hidden">
+                  <Image
+                    src={cat.imageUrl}
+                    alt={cat.label}
+                    fill
+                    className="object-contain"
+                    sizes="56px"
+                  />
+                </div>
+                <span className="text-[12px] font-medium leading-[16px] text-[var(--color-text-figma-primary)] text-center whitespace-nowrap">
+                  {cat.label}
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Desktop/Tablet: wrap grid */}
+          <div className="hidden md:flex flex-wrap gap-2 px-10 lg:px-[120px]">
             {CATEGORIES.map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/${cat.slug}`}
                 className={cn(
                   "flex flex-col items-center justify-center gap-2",
-                  "w-[calc((100%-32px)/3)] md:w-[110px] h-[120px]",
+                  "w-[110px] h-[120px]",
                   "bg-[var(--color-surface)] border border-[#e5e5e5] rounded-[8px]",
                   "px-2 py-4",
                   "transition-shadow duration-200 hover:shadow-md"
                 )}
               >
-                {/* Category image */}
                 <div className="relative size-[70px] overflow-hidden">
                   <Image
                     src={cat.imageUrl}
@@ -71,9 +99,7 @@ export function FeaturedCategories({ className }: FeaturedCategoriesProps) {
                     sizes="70px"
                   />
                 </div>
-
-                {/* Category label */}
-                <span className="text-[14px] font-medium leading-[18px] text-[var(--color-text-figma-primary)] text-center">
+                <span className="text-[14px] font-medium leading-[18px] text-[var(--color-text-figma-primary)] text-center whitespace-nowrap">
                   {cat.label}
                 </span>
               </Link>

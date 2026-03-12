@@ -37,7 +37,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
         "group flex flex-col w-full",
         "bg-[var(--color-surface)] rounded-[8px]",
         "border border-[#E5E5E5]",
-        "hover:shadow-[0_4px_16px_rgba(0,0,0,0.10)] transition-shadow duration-200 overflow-hidden",
+        "transition-shadow duration-200",
         !inStock && "opacity-70",
         className
       )}
@@ -67,21 +67,19 @@ export function ProductCard({ product, className }: ProductCardProps) {
         {/* 2a: badges → name → specs (gap-[4px]) */}
         <div className="flex flex-col gap-1">
 
-          {/* Badges row */}
-          {badges && badges.length > 0 && (
-            <div className="flex gap-1 flex-wrap">
-              {badges[0] && (
-                <span className="inline-flex items-center px-1 py-[2px] rounded-[4px] bg-[var(--color-badge-primary-bg)] border border-[var(--color-badge-primary-border)] text-[11px] font-semibold leading-[14px] text-white whitespace-nowrap">
-                  {badges[0]}
-                </span>
-              )}
-              {badges[1] && (
-                <span className="inline-flex items-center px-1 py-[2px] rounded-[4px] bg-[var(--color-badge-secondary-bg)] text-[11px] font-semibold leading-[14px] text-[var(--color-badge-secondary-text)] whitespace-nowrap">
-                  {badges[1]}
-                </span>
-              )}
-            </div>
-          )}
+          {/* Badges row — min-h reserved so cards align even without badges */}
+          <div className="flex gap-1 flex-wrap min-h-[20px] items-center">
+            {badges?.[0] && (
+              <span className="inline-flex items-center px-1 py-[2px] rounded-[4px] bg-[var(--color-badge-primary-bg)] border border-[var(--color-badge-primary-border)] text-[11px] font-semibold leading-[14px] text-white whitespace-nowrap">
+                {badges[0]}
+              </span>
+            )}
+            {badges?.[1] && (
+              <span className="inline-flex items-center px-1 py-[2px] rounded-[4px] bg-[var(--color-badge-secondary-bg)] text-[11px] font-semibold leading-[14px] text-[var(--color-badge-secondary-text)] whitespace-nowrap">
+                {badges[1]}
+              </span>
+            )}
+          </div>
 
           {/* Product name — 2-line clamp fixed height 40px */}
           <div className="h-[40px] overflow-hidden shrink-0">
@@ -90,19 +88,25 @@ export function ProductCard({ product, className }: ProductCardProps) {
             </p>
           </div>
 
-          {/* Specs block */}
-          {specs && specs.length > 0 && (
-            <div className="bg-[var(--color-spec-block-bg)] rounded-[8px] p-2 flex flex-wrap gap-x-2 gap-y-1">
-              {specs.map((spec) => (
-                <span
-                  key={spec}
-                  className="inline-flex items-center px-[6px] py-[2px] rounded-[4px] bg-[var(--color-spec-chip-bg)] text-[10px] font-normal leading-[12px] text-[var(--color-spec-chip-text)] whitespace-nowrap"
-                >
-                  {spec}
-                </span>
-              ))}
-            </div>
-          )}
+          {/* Specs block — always reserves min-h; background only shows when there are specs */}
+          {/* h-[52px] = p-2 (8+8) + 2 chip rows (16px each) + gap-y-1 (4px) = 52px exactly */}
+          <div
+            className={cn(
+              "h-[52px] rounded-[8px] flex flex-wrap content-start gap-x-2 gap-y-1 overflow-hidden",
+              specs && specs.length > 0
+                ? "bg-[var(--color-spec-block-bg)] p-2"
+                : ""
+            )}
+          >
+            {specs?.slice(0, 5).map((spec) => (
+              <span
+                key={spec}
+                className="inline-flex items-center px-[6px] py-[2px] rounded-[4px] bg-[var(--color-spec-chip-bg)] text-[10px] font-normal leading-[12px] text-[var(--color-spec-chip-text)] whitespace-nowrap"
+              >
+                {spec.length > 15 ? spec.slice(0, 15) + "…" : spec}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* 2c: price area — pushed to bottom with mt-auto */}
@@ -127,21 +131,19 @@ export function ProductCard({ product, className }: ProductCardProps) {
             {formatVND(price)}
           </span>
 
-          {/* Voucher chips */}
-          {vouchers && vouchers.length > 0 && (
-            <div className="flex gap-1 overflow-hidden">
-              {vouchers[0] && (
-                <span className="inline-flex items-center px-1 py-[2px] rounded-[4px] bg-[var(--color-voucher-green-bg)] text-[11px] font-normal leading-[14px] text-[var(--color-voucher-green-text)] whitespace-nowrap">
-                  {vouchers[0]}
-                </span>
-              )}
-              {vouchers[1] && (
-                <span className="inline-flex items-center px-1 py-[2px] rounded-[4px] bg-[var(--color-voucher-orange-bg)] text-[11px] font-normal leading-[14px] text-[var(--color-voucher-orange-text)] whitespace-nowrap">
-                  {vouchers[1]}
-                </span>
-              )}
-            </div>
-          )}
+          {/* Voucher chips — min-h reserved so cards align even without vouchers */}
+          <div className="flex gap-1 overflow-hidden min-h-[22px] items-center">
+            {vouchers?.[0] && (
+              <span className="inline-flex items-center px-1 py-[2px] rounded-[4px] bg-[var(--color-voucher-green-bg)] text-[11px] font-normal leading-[14px] text-[var(--color-voucher-green-text)] whitespace-nowrap">
+                {vouchers[0]}
+              </span>
+            )}
+            {vouchers?.[1] && (
+              <span className="inline-flex items-center px-1 py-[2px] rounded-[4px] bg-[var(--color-voucher-orange-bg)] text-[11px] font-normal leading-[14px] text-[var(--color-voucher-orange-text)] whitespace-nowrap">
+                {vouchers[1]}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 

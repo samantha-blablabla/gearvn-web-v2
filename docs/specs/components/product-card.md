@@ -92,7 +92,7 @@ ProductCard (Link, flex col, w-full, rounded-[8px], border #E5E5E5)
 | Property | Value |
 |----------|-------|
 | Card width | `w-full` (fills grid column) |
-| Card height | auto (content-driven) |
+| Card height | auto (content-driven, đồng đều nhờ reserved zones) |
 | Card border-radius | `8px` |
 | Image area height | `h-[220px]` (fixed) |
 | Product image | `size-[160px]`, `object-contain` |
@@ -126,10 +126,14 @@ ProductCard (Link, flex col, w-full, rounded-[8px], border #E5E5E5)
 - Row dùng `overflow-hidden` để không vỡ layout nếu cả 2 chips đều dài
 
 ### 4.4 Specs Block
-- Hiển thị khi `specs` array có phần tử
-- Mỗi spec chip: bg `#E5E5E5`, `10px / 400`, tối đa ~20 ký tự
-- Dùng `flex-wrap` — overflow tự xuống dòng trong block
-- Không giới hạn số lượng spec chips (wrap tự xử lý)
+- **Chiều cao cố định `h-[52px]`** — luôn reserve space dù có hay không có specs
+  - Tính toán: `p-2 (8+8px)` + `row 1 (16px)` + `gap-y-1 (4px)` + `row 2 (16px)` = **52px**
+- **Tối đa 5 chips** — `specs.slice(0, 5)`, chip thứ 6+ bị bỏ qua
+- **Mỗi chip tối đa 15 ký tự** — nếu dài hơn truncate thành `"text…"`
+- Dùng `flex-wrap content-start` — chips xếp từ trên xuống, tối đa 2 hàng
+- `overflow-hidden` — chip nào tràn sang hàng 3 bị ẩn hoàn toàn (không clip giữa chip)
+- **Khi không có specs**: block vẫn render nhưng không có background/padding — invisible spacer 52px
+- Ví dụ chips hợp lệ: `"Wireless"`, `"25600 DPI"`, `"60g"`, `"Core i9"`, `"RTX 4060"`
 
 ### 4.5 Rating
 - Chỉ hiển thị khi `rating !== undefined`
@@ -175,7 +179,7 @@ interface Product {
   reviewCount?: number;
   inStock?: boolean;             // false → opacity 70%
   badges?: string[];             // Tối đa 2 items, mỗi item ≤ 20 ký tự
-  specs?: string[];              // Không giới hạn, flex-wrap
+  specs?: string[];              // Tối đa 5 chips hiển thị, mỗi chip ≤ 15 ký tự (truncate tự động)
   vouchers?: string[];           // Tối đa 2 items, mỗi item ≤ 20 ký tự
 }
 ```
@@ -190,9 +194,9 @@ interface Product {
 | Hover | `box-shadow: 0 4px 16px rgba(0,0,0,0.10)` via transition |
 | Out of stock (`inStock: false`) | `opacity-70` |
 | No image | Fallback `/assets/images/placeholder-product.png` |
-| No badges | Badge row ẩn |
-| No specs | Specs block ẩn |
-| No vouchers | Voucher row ẩn |
+| No badges | Badge row vẫn render, `min-h-[20px]` giữ chỗ |
+| No specs | Specs block vẫn render (`h-[52px]`), không có bg/padding — invisible spacer |
+| No vouchers | Voucher row vẫn render, `min-h-[22px]` giữ chỗ |
 | No rating | Zone 3 ẩn hoàn toàn |
 
 ---

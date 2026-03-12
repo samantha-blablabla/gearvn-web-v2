@@ -14,18 +14,18 @@ interface BrandItem {
 }
 
 const BRANDS: BrandItem[] = [
-  { name: "Asus", slug: "asus", logoUrl: "/assets/images/brands/asus.png" },
+  { name: "ASUS", slug: "asus", logoUrl: "/assets/images/brands/asus.png" },
+  { name: "Acer", slug: "acer", logoUrl: "/assets/images/brands/acer.png" },
   { name: "MSI", slug: "msi", logoUrl: "/assets/images/brands/msi.png" },
-  { name: "Gigabyte", slug: "gigabyte", logoUrl: "/assets/images/brands/gigabyte.png" },
-  { name: "Intel", slug: "intel", logoUrl: "/assets/images/brands/intel.png" },
-  { name: "AMD", slug: "amd", logoUrl: "/assets/images/brands/amd.png" },
+  { name: "Razer", slug: "razer", logoUrl: "/assets/images/brands/razer.png" },
+  { name: "GIGABYTE", slug: "gigabyte", logoUrl: "/assets/images/brands/gigabyte.png" },
+  { name: "Lenovo", slug: "lenovo", logoUrl: "/assets/images/brands/lenovo.png" },
+  { name: "ViewSonic", slug: "viewsonic", logoUrl: "/assets/images/brands/viewsonic.png" },
   { name: "Corsair", slug: "corsair", logoUrl: "/assets/images/brands/corsair.png" },
   { name: "Logitech", slug: "logitech", logoUrl: "/assets/images/brands/logitech.png" },
-  { name: "Razer", slug: "razer", logoUrl: "/assets/images/brands/razer.png" },
-  { name: "Kingston", slug: "kingston", logoUrl: "/assets/images/brands/kingston.png" },
-  { name: "Samsung", slug: "samsung", logoUrl: "/assets/images/brands/samsung.png" },
-  { name: "Seagate", slug: "seagate", logoUrl: "/assets/images/brands/seagate.png" },
-  { name: "WD", slug: "wd", logoUrl: "/assets/images/brands/wd.png" },
+  { name: "Akko", slug: "akko", logoUrl: "/assets/images/brands/akko.png" },
+  { name: "EDRA", slug: "edra", logoUrl: "/assets/images/brands/edra.png" },
+  { name: "SteelSeries", slug: "steelseries", logoUrl: "/assets/images/brands/steelseries.png" },
 ];
 
 export function BrandSection({ className }: BrandSectionProps) {
@@ -38,7 +38,7 @@ export function BrandSection({ className }: BrandSectionProps) {
           {/* ── Left Banner ── */}
           <div className="relative w-full lg:w-[478px] lg:shrink-0 h-[160px] lg:h-[239px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)]">
             <Image
-              src="/assets/images/brand-banner.jpg"
+              src="/assets/images/banners/brand-main-1.jpg"
               alt="Danh mục hãng"
               fill
               className="object-cover"
@@ -65,7 +65,7 @@ export function BrandSection({ className }: BrandSectionProps) {
               {/* Nav arrows (desktop only) */}
               <button
                 aria-label="Trước"
-                className="hidden lg:flex absolute -left-5 top-1/2 -translate-y-1/2 z-10 size-[42px] items-center justify-center rounded-full bg-white shadow-md border border-[#e5e5e5] hover:bg-[#f5f5f5] transition-colors"
+                className="hidden lg:flex absolute -left-5 top-1/2 -translate-y-1/2 z-10 size-[42px] items-center justify-center rounded-full bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)] shadow-[var(--glass-shadow)] border border-[var(--glass-border)] hover:bg-[var(--glass-bg-hover)] transition-all duration-200"
               >
                 <ChevronLeft size={20} />
               </button>
@@ -97,7 +97,7 @@ export function BrandSection({ className }: BrandSectionProps) {
 
               <button
                 aria-label="Tiếp"
-                className="hidden lg:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 size-[42px] items-center justify-center rounded-full bg-white shadow-md border border-[#e5e5e5] hover:bg-[#f5f5f5] transition-colors"
+                className="hidden lg:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 size-[42px] items-center justify-center rounded-full bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)] shadow-[var(--glass-shadow)] border border-[var(--glass-border)] hover:bg-[var(--glass-bg-hover)] transition-all duration-200"
               >
                 <ChevronRight size={20} />
               </button>

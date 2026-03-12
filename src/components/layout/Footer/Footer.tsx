@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Facebook, Youtube, Instagram } from "lucide-react";
+import { Facebook, Youtube } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface FooterProps {
@@ -63,8 +63,8 @@ function LogoGrid({ logos }: { logos: { src: string; alt: string }[] }) {
   return (
     <div className="flex flex-wrap gap-[4px]">
       {logos.map(({ src, alt }) => (
-        <div key={alt} className="w-[50px] h-[30px] rounded-[4px] bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center overflow-hidden">
-          <Image src={src} alt={alt} width={46} height={26} className="object-contain" />
+        <div key={alt} className="relative w-[50px] h-[30px] rounded-[4px] bg-[#1a1a1a] border border-[#2a2a2a] overflow-hidden">
+          <Image src={src} alt={alt} fill className="object-contain p-[3px]" sizes="50px" />
         </div>
       ))}
     </div>
@@ -82,7 +82,7 @@ export function Footer({ className }: FooterProps) {
           {/* Col 1 — Brand + Social */}
           <div className="flex flex-col gap-[24px] items-start shrink-0">
             {/* Logo */}
-            <div className="relative w-[160px] h-[42px]">
+            <div className="relative w-[160px] h-[37px]">
               <Image
                 src="/assets/images/logo-gearvn.svg"
                 alt="GEARVN"
@@ -196,7 +196,7 @@ export function Footer({ className }: FooterProps) {
           </div>
 
           {/* Col 5 — Thanh toán + Vận chuyển */}
-          <div className="flex flex-col gap-[32px] shrink-0">
+          <div className="flex flex-col gap-[32px] shrink-0 w-full lg:w-[212px]">
             {/* Hỗ trợ thanh toán */}
             <div className="flex flex-col gap-[12px]">
               <h3 className="text-[16px] font-semibold text-white tracking-[-0.32px] leading-[20px]">
@@ -221,15 +221,13 @@ export function Footer({ className }: FooterProps) {
             Thông tin đăng ký và GPĐKKD của công ty sẽ điền ở đây
           </p>
           {/* Bộ Công Thương badge */}
-          <div className="flex items-center gap-[6px] border border-[#404040] rounded-[4px] px-[8px] py-[4px]">
-            <div className="size-[24px] rounded-full bg-[#1a56db] flex items-center justify-center shrink-0">
-              <span className="text-white text-[8px] font-bold leading-none">✓</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[8px] font-bold text-white leading-[10px] uppercase tracking-wide">Đã thông báo</span>
-              <span className="text-[8px] text-[#737373] leading-[10px]">Bộ Công Thương</span>
-            </div>
-          </div>
+          <Image
+            src="/assets/images/bct-logo.png"
+            alt="Đã thông báo Bộ Công Thương"
+            width={135}
+            height={53}
+            className="shrink-0"
+          />
         </div>
       </div>
     </footer>

@@ -42,14 +42,14 @@ export function FlashSaleProductCard({
     <Link
       href={`/san-pham/${product.slug ?? product.id}`}
       className={cn(
-        "flex flex-col w-[220px] shrink-0",
+        "flex flex-col w-[176px] md:w-[190px] lg:w-[220px] shrink-0",
         "bg-white border border-[#E5E5E5] rounded-[8px]",
         "hover:shadow-[0_4px_16px_rgba(0,0,0,0.10)] transition-shadow duration-200",
         className
       )}
     >
       {/* ── Image area ─────────────────────────────── */}
-      <div className="relative flex flex-col h-[220px] pt-[12px] px-[8px]">
+      <div className="relative flex flex-col h-[176px] md:h-[190px] lg:h-[220px] pt-[12px] px-[8px]">
         {/* Fire badge — top-RIGHT (Figma node 120:4152, items-end) */}
         <div className="flex justify-end w-full px-[4px]">
           <div
@@ -84,12 +84,12 @@ export function FlashSaleProductCard({
 
         {/* Product image */}
         <div className="flex items-center justify-center flex-1">
-          <div className="relative size-[160px]">
+          <div className="relative size-[128px] md:size-[150px] lg:size-[160px]">
             <Image
               src={product.imageUrl ?? "/assets/images/placeholder-product.svg"}
               alt={product.name}
               fill
-              sizes="160px"
+              sizes="(max-width: 768px) 128px, (max-width: 1024px) 150px, 160px"
               className="object-contain"
             />
           </div>
@@ -97,21 +97,21 @@ export function FlashSaleProductCard({
       </div>
 
       {/* ── Content area ───────────────────────────── */}
-      <div className="flex flex-col gap-[8px] px-[12px] py-[8px]">
+      <div className="flex flex-col gap-[6px] md:gap-[8px] px-[8px] md:px-[12px] py-[6px] md:py-[8px]">
         {/* Product name — 2 lines max, truncate with ellipsis */}
-        <div className="h-[40px] overflow-hidden shrink-0">
-          <p className="font-medium text-[12px] leading-[16px] text-[var(--color-text-figma-primary)] line-clamp-2">
+        <div className="h-[32px] md:h-[40px] overflow-hidden shrink-0">
+          <p className="font-medium text-[11px] md:text-[12px] leading-[14px] md:leading-[16px] text-[var(--color-text-figma-primary)] line-clamp-2">
             {product.name}
           </p>
         </div>
 
         {/* Price block */}
-        <div className="flex flex-col gap-[4px]">
+        <div className="flex flex-col gap-[2px] md:gap-[4px]">
           {/* Original price + discount % */}
           <div className="flex items-center gap-[4px]">
             {product.originalPrice && (
               <span
-                className="text-[15px] font-normal leading-[20px] line-through"
+                className="text-[12px] md:text-[15px] font-normal leading-[16px] md:leading-[20px] line-through"
                 style={{ color: "var(--color-flash-price-original)" }}
               >
                 {formatVND(product.originalPrice)}
@@ -121,7 +121,7 @@ export function FlashSaleProductCard({
               <span
                 className={cn(
                   "rounded-[4px] px-[4px] py-[1px]",
-                  "font-semibold text-[11px] leading-[14px] whitespace-nowrap"
+                  "font-semibold text-[10px] md:text-[11px] leading-[13px] md:leading-[14px] whitespace-nowrap"
                 )}
                 style={{
                   backgroundColor: "var(--color-flash-discount-bg)",
@@ -134,7 +134,7 @@ export function FlashSaleProductCard({
           </div>
           {/* Sale price */}
           <span
-            className="font-bold text-[20px] leading-[26px]"
+            className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[20px] md:leading-[24px] lg:leading-[26px]"
             style={{ color: "var(--color-flash-price-sale)" }}
           >
             {formatVND(product.price)}
@@ -143,7 +143,7 @@ export function FlashSaleProductCard({
       </div>
 
       {/* ── LoadBar ────────────────────────────────── */}
-      <div className="flex flex-col gap-[8px] px-[12px] pb-[24px] pt-[12px]">
+      <div className="flex flex-col gap-[8px] px-[8px] md:px-[12px] pb-[16px] md:pb-[24px] pt-[8px] md:pt-[12px]">
         <div
           className="relative h-[15px] w-full rounded-[8px] overflow-hidden"
           style={{ backgroundColor: "var(--color-flash-loadbar-track)" }}

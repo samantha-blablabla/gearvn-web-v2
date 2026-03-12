@@ -19,6 +19,8 @@ export interface Product {
   specs?: string[];
   /** Voucher chip labels. First = green, second = orange */
   vouchers?: string[];
+  /** Number of bundled gifts — shows "Quà tặng kèm (n)" badge in CartPanel */
+  giftCount?: number;
 }
 
 export interface CartItem {

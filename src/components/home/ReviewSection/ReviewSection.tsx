@@ -28,24 +28,58 @@ export interface ReviewSectionProps {
   className?: string;
 }
 
+const REVIEW_TITLES = [
+  "Trải nghiệm Chuột Logitech G Pro X Superlight 2 sau 30 ngày",
+  "Setup bàn làm việc Gaming tối giản dưới 10 triệu",
+  "So sánh bàn phím cơ Akko vs Keychron — cái nào đáng mua?",
+  "Review ghế EDRA Mars E-GC sau 6 tháng sử dụng",
+  "Unbox & đánh giá nhanh Laptop ASUS ROG Strix G16",
+  "Top 5 tai nghe gaming dưới 2 triệu đáng mua nhất",
+  "Trên tay màn hình ViewSonic 27 inch 2K 165Hz",
+  "Review bộ PC build 15 triệu chơi mượt mọi game",
+  "So sánh Razer Viper V3 vs Logitech G Pro — ai thắng?",
+  "Góc setup gaming RGB cực đẹp của Gearvn fan",
+];
+
+const REVIEW_PRODUCTS: Pick<Product, "name" | "imageUrl" | "price" | "originalPrice">[] = [
+  { name: "Chuột Gaming Logitech G Pro X Superlight 2 Wireless", imageUrl: "/assets/images/placeholder-product.svg", price: 1_990_000, originalPrice: 2_490_000 },
+  { name: "Bàn phím cơ Akko 3068B Plus Black & Gold", imageUrl: "/assets/images/placeholder-product.svg", price: 1_290_000, originalPrice: 1_590_000 },
+  { name: "Tai nghe Gaming Corsair HS80 RGB Wireless", imageUrl: "/assets/images/placeholder-product.svg", price: 2_890_000, originalPrice: 3_490_000 },
+  { name: "Ghế Gaming EDRA Mars E-GC", imageUrl: "/assets/images/placeholder-product.svg", price: 3_490_000, originalPrice: 4_290_000 },
+  { name: "Laptop ASUS ROG Strix G16 RTX 4060", imageUrl: "/assets/images/placeholder-product.svg", price: 29_990_000, originalPrice: 34_990_000 },
+  { name: "Tai nghe Razer BlackShark V2 X USB", imageUrl: "/assets/images/placeholder-product.svg", price: 1_490_000, originalPrice: 1_890_000 },
+  { name: "Màn hình ViewSonic VX2758-2KP-MHD 27 inch", imageUrl: "/assets/images/placeholder-product.svg", price: 5_990_000, originalPrice: 7_490_000 },
+  { name: "VGA MSI GeForce RTX 4060 VENTUS 2X", imageUrl: "/assets/images/placeholder-product.svg", price: 7_990_000, originalPrice: 9_490_000 },
+  { name: "Chuột Razer Viper V3 HyperSpeed", imageUrl: "/assets/images/placeholder-product.svg", price: 2_490_000, originalPrice: 2_990_000 },
+  { name: "Bàn phím cơ Corsair K70 RGB Pro", imageUrl: "/assets/images/placeholder-product.svg", price: 3_290_000, originalPrice: 3_990_000 },
+];
+
 const DEFAULT_REVIEWS: ReviewCard[] = Array.from({ length: 10 }, (_, i) => ({
   id: `review-${i + 1}`,
-  title: "Where to grow your business as a photographer: site or social media?",
-  thumbnailUrl: "/assets/images/reviews/review-thumb-placeholder.jpg",
-  product: {
-    name: "Chuột Gaming Logitech G Pro X Superlight 2 Wireless",
-    imageUrl: "/assets/images/placeholder-product.svg",
-    price: 1_990_000,
-    originalPrice: 2_490_000,
-  },
-  href: `/review/review-${i + 1}`,
+  title: REVIEW_TITLES[i],
+  thumbnailUrl: `/assets/images/reviews/review-portrait-${(i % 5) + 1}.svg`,
+  product: REVIEW_PRODUCTS[i],
+  href: `https://youtube.com/shorts/placeholder-${i + 1}`,
 }));
+
+const VIDEO_TITLES = [
+  "Đập hộp Laptop MSI Titan GT77 — Quái vật gaming 80 triệu!",
+  "Build PC 20 triệu chơi mọi game 2K Max Setting",
+  "So sánh RTX 4060 vs RTX 4070 — Chênh 5 triệu có đáng?",
+  "Review màn hình cong Samsung Odyssey G9 49 inch",
+  "Top 5 chuột gaming bán chạy nhất tại GearVN 2024",
+  "Hướng dẫn tản nhiệt nước custom cho người mới bắt đầu",
+  "Laptop văn phòng Lenovo ThinkPad vs Dell Latitude — nên chọn ai?",
+  "Test game Cyberpunk 2077 trên RTX 4090 — 4K Ultra có mượt?",
+  "Setup góc gaming 50 triệu siêu đẹp cho streamer",
+  "Bàn phím cơ dưới 1 triệu nào đáng mua nhất 2024?",
+];
 
 const DEFAULT_VIDEOS: VideoCard[] = Array.from({ length: 10 }, (_, i) => ({
   id: `video-${i + 1}`,
-  title: "Video review sản phẩm công nghệ gaming gear mới nhất",
-  thumbnailUrl: `/assets/images/reviews/video-thumb-${(i % 4) + 1}.jpg`,
-  href: `/review/video-${i + 1}`,
+  title: VIDEO_TITLES[i],
+  thumbnailUrl: `/assets/images/reviews/video-thumb-${(i % 4) + 1}.svg`,
+  href: `https://youtube.com/watch?v=placeholder-${i + 1}`,
 }));
 
 const SCROLL_AMOUNT = 280;
@@ -115,7 +149,7 @@ function NavButton({
       aria-label={direction === "prev" ? "Trước" : "Tiếp"}
       className={cn(
         "hidden lg:flex absolute top-1/2 -translate-y-1/2 z-10",
-        "size-[42px] items-center justify-center rounded-full bg-white shadow-md border border-[#e5e5e5] hover:bg-[#f5f5f5] transition-colors",
+        "size-[42px] items-center justify-center rounded-full bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)] shadow-[var(--glass-shadow)] border border-[var(--glass-border)] hover:bg-[var(--glass-bg-hover)] transition-all duration-200",
         direction === "prev" ? "-left-5" : "-right-5",
         className
       )}

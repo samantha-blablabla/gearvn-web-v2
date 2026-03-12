@@ -38,20 +38,20 @@ export function CategoryTabs({ className }: CategoryTabsProps) {
   return (
     <nav
       className={cn(
-        "w-full bg-[var(--color-surface)]",
+        "w-full bg-[var(--color-surface)] hidden md:block",
         className
       )}
     >
-      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px] h-[66px] flex items-center justify-between">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px] h-[56px] md:h-[66px] flex items-center gap-2 md:justify-between overflow-x-auto scrollbar-hide">
         {TABS.map(({ label, href, icon }) => (
           <Link
             key={href}
             href={href}
             className={cn(
-              "flex items-center gap-2 px-3 py-[10px] rounded-[8px]",
-              "text-[16px] font-semibold leading-[22px] text-[var(--color-text-figma-primary)]",
+              "flex items-center gap-2 px-2 md:px-3 py-[10px] rounded-[8px]",
+              "text-[13px] md:text-[16px] font-semibold leading-[22px] text-[var(--color-text-figma-primary)]",
               "hover:bg-[var(--color-surface-subtle)] transition-colors",
-              "whitespace-nowrap"
+              "whitespace-nowrap shrink-0"
             )}
           >
             <div className="relative size-5 shrink-0">
@@ -63,7 +63,7 @@ export function CategoryTabs({ className }: CategoryTabsProps) {
                 sizes="20px"
               />
             </div>
-            {label}
+            <span className="hidden md:inline">{label}</span>
           </Link>
         ))}
       </div>

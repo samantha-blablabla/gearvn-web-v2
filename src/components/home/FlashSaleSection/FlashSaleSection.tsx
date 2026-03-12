@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FlashSaleProductCard } from "@/components/product/FlashSaleProductCard";
@@ -19,7 +19,7 @@ export interface FlashSaleSectionProps {
 
 // ── Countdown hook ──────────────────────────────────────────────────────────
 function useCountdown(endTime?: Date) {
-  const calc = () => {
+  const calc = useCallback(() => {
     if (!endTime) return { h: 0, m: 0, s: 0 };
     const diff = Math.max(0, endTime.getTime() - Date.now());
     return {
@@ -27,7 +27,7 @@ function useCountdown(endTime?: Date) {
       m: Math.floor((diff % 3600000) / 60000),
       s: Math.floor((diff % 60000) / 1000),
     };
-  };
+  }, [endTime]);
 
   const [time, setTime] = useState(calc);
 
@@ -35,7 +35,7 @@ function useCountdown(endTime?: Date) {
     if (!endTime) return;
     const id = setInterval(() => setTime(calc()), 1000);
     return () => clearInterval(id);
-  }, [endTime]);
+  }, [endTime, calc]);
 
   return time;
 }
@@ -46,9 +46,9 @@ function CountdownBox({ value }: { value: number }) {
     <div
       className={cn(
         "flex items-center justify-center",
-        "bg-[#F5F5F5] rounded-[8px] p-[12px]",
-        "font-semibold text-[18px] leading-[22px] text-[#262626]",
-        "min-w-[49px]"
+        "bg-[#F5F5F5] rounded-[6px] md:rounded-[8px] p-[8px] md:p-[12px]",
+        "font-semibold text-[14px] md:text-[18px] leading-[18px] md:leading-[22px] text-[#262626]",
+        "min-w-[36px] md:min-w-[49px]"
       )}
     >
       {String(value).padStart(2, "0")}
@@ -62,8 +62,8 @@ function DatePill({ label }: { label: string }) {
     <div
       className={cn(
         "flex items-center justify-center",
-        "bg-[#F5F5F5] rounded-[8px] px-[12px] py-[10px]",
-        "font-semibold text-[16px] leading-[22px] text-[#262626]",
+        "bg-[#F5F5F5] rounded-[6px] md:rounded-[8px] px-[8px] md:px-[12px] py-[8px] md:py-[10px]",
+        "font-semibold text-[13px] md:text-[16px] leading-[18px] md:leading-[22px] text-[#262626]",
         "whitespace-nowrap"
       )}
     >
@@ -86,8 +86,10 @@ function NavButton({
       aria-label={direction === "left" ? "Trang trước" : "Trang sau"}
       className={cn(
         "flex items-center justify-center",
-        "bg-[#F5F5F5] rounded-[8px] px-[12px] py-[10px]",
-        "transition-colors hover:bg-[#E5E5E5]"
+        "rounded-[8px] px-[12px] py-[10px]",
+        "bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)] shadow-[var(--glass-shadow)]",
+        "border border-[var(--glass-border)]",
+        "transition-all duration-200 hover:bg-[var(--glass-bg-hover)]"
       )}
     >
       {direction === "left" ? (
@@ -114,10 +116,17 @@ export function FlashSaleSection({
   const [activeDot, setActiveDot] = useState(0);
   const totalPages = Math.ceil(products.length / 5);
 
+  const getCardStep = () => {
+    const el = scrollRef.current;
+    if (!el) return 232;
+    const firstCard = el.querySelector<HTMLElement>(":scope > *");
+    return firstCard ? firstCard.offsetWidth + 12 : 232;
+  };
+
   const scroll = (dir: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
-    const step = 232 * 5; // 220px card + 12px gap, 5 cards per page
+    const step = getCardStep() * 2; // scroll 2 cards at a time
     el.scrollBy({ left: dir === "right" ? step : -step, behavior: "smooth" });
   };
 
@@ -126,7 +135,8 @@ export function FlashSaleSection({
     const el = scrollRef.current;
     if (!el) return;
     const onScroll = () => {
-      const page = Math.round(el.scrollLeft / (232 * 5));
+      const cardStep = getCardStep();
+      const page = Math.round(el.scrollLeft / (cardStep * 5));
       setActiveDot(page);
     };
     el.addEventListener("scroll", onScroll, { passive: true });
@@ -140,10 +150,10 @@ export function FlashSaleSection({
       className={cn("w-full", className)}
       style={{ backgroundColor: "var(--color-flash-sale-outer-bg)" }}
     >
-      <div className="max-w-[1440px] mx-auto px-[120px] py-[32px]">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px] py-4 lg:py-[32px]">
         {/* ── Inner rounded gradient container ─────── */}
         <div
-          className="flex flex-col gap-[32px] rounded-[32px] px-[32px] py-[32px] w-full"
+          className="flex flex-col gap-4 lg:gap-[32px] rounded-[16px] lg:rounded-[32px] px-3 md:px-[24px] lg:px-[32px] py-4 lg:py-[32px] w-full"
           style={{
             background:
               "linear-gradient(to bottom, #FFD7C6, #FF4800)",
@@ -151,7 +161,7 @@ export function FlashSaleSection({
         >
           {/* ── Banner placeholder ─────────────────── */}
           <div
-            className="w-full h-[120px] rounded-[24px] relative overflow-hidden"
+            className="w-full h-[80px] md:h-[100px] lg:h-[120px] rounded-[12px] lg:rounded-[24px] relative overflow-hidden"
             style={{
               background: "linear-gradient(to bottom, #FFA983, #F54A00)",
               boxShadow: "inset 0px 4px 4px 0px rgba(255,102,0,0.4)",
@@ -159,21 +169,21 @@ export function FlashSaleSection({
           />
 
           {/* ── Countdown & Date row ───────────────── */}
-          <div className="flex items-center justify-between py-[8px]">
+          <div className="flex flex-row items-center justify-between gap-2 md:gap-3 py-[8px]">
             {/* Date pills (left) */}
-            <div className="flex gap-[10px] items-start">
+            <div className="flex gap-[6px] md:gap-[10px] items-start">
               <DatePill label={dateFrom} />
               <DatePill label={dateTo} />
             </div>
 
             {/* Countdown (right) */}
-            <div className="flex items-center gap-[10px]">
+            <div className="flex items-center gap-[6px] md:gap-[10px]">
               <CountdownBox value={h} />
-              <span className="font-semibold text-[18px] leading-[22px] text-black">
+              <span className="font-semibold text-[14px] md:text-[18px] leading-[22px] text-black">
                 :
               </span>
               <CountdownBox value={m} />
-              <span className="font-semibold text-[18px] leading-[22px] text-black">
+              <span className="font-semibold text-[14px] md:text-[18px] leading-[22px] text-black">
                 :
               </span>
               <CountdownBox value={s} />
@@ -193,10 +203,10 @@ export function FlashSaleSection({
             </div>
 
             {/* Bottom: dots + buttons */}
-            <div className="flex items-center justify-between py-[8px]">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3 py-[8px]">
               {/* Dot pagination */}
               <div
-                className="flex gap-[6px] items-center p-[8px] rounded-full"
+                className="hidden md:flex gap-[6px] items-center p-[8px] rounded-full"
                 style={{
                   background: "rgba(229,229,229,0.02)",
                   boxShadow: "0px 2px 8px 0px rgba(0,0,0,0.15)",
@@ -221,14 +231,14 @@ export function FlashSaleSection({
                   href="/khuyen-mai"
                   className={cn(
                     "flex items-center justify-center",
-                    "bg-[#F5F5F5] rounded-[8px] px-[12px] py-[10px]",
-                    "font-semibold text-[16px] leading-[22px] text-[#262626]",
+                    "bg-[#F5F5F5] rounded-[8px] px-[12px] py-[10px] min-h-[44px]",
+                    "font-semibold text-[14px] md:text-[16px] leading-[22px] text-[#262626]",
                     "whitespace-nowrap hover:bg-[#E5E5E5] transition-colors"
                   )}
                 >
                   Xem tất cả khuyến mãi
                 </Link>
-                <div className="flex items-center gap-[8px]">
+                <div className="hidden lg:flex items-center gap-[8px]">
                   <NavButton direction="left" onClick={() => scroll("left")} />
                   <NavButton direction="right" onClick={() => scroll("right")} />
                 </div>

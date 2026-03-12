@@ -52,8 +52,8 @@
 | Menu item icon radius | `4px` |
 | Menu item text | `Inter Medium 14px #262626` |
 | Middle column width | `604px` |
-| Main banner height | `340px` |
-| Secondary banner height | `268px` |
+| Main banner size | `604×340px` (16:9 ratio, fixed) |
+| Secondary banner size | `604×268px` (free ratio) |
 | Banner border-radius | `12px` |
 | Banner nav button size | `32px` |
 | Banner nav button radius | `16px` |
@@ -61,8 +61,10 @@
 | Banner nav shadow | `0px 0px 5.333px rgba(0,0,0,0.2)` |
 | Banner dot active | `w-16px h-6px white` |
 | Banner dot inactive | `6px circle white/60` |
-| Right column | `flex-1` (≈300px) |
-| Right column banners | `4 equal-height slots` |
+| Right column width | `300px` |
+| Right column height | `616px` |
+| Right column banners | `4 banners × 300×148px`, gap `8px` |
+| Right column banner radius | `12px` |
 
 ---
 

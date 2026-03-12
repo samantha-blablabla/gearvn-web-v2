@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ProductCard } from "@/components/product/ProductCard";
@@ -72,10 +72,10 @@ export function ProductSection({
               className={cn(
                 "absolute left-[-16px] top-1/2 -translate-y-1/2 z-10",
                 "w-[32px] h-[32px] rounded-full flex items-center justify-center",
-                "bg-[var(--color-surface)] shadow-[var(--shadow-md)]",
-                "border border-[var(--color-border)]",
-                "opacity-0 group-hover/section:opacity-100 transition-opacity",
-                "hover:bg-[var(--color-surface-subtle)]"
+                "bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)] shadow-[var(--glass-shadow)]",
+                "border border-[var(--glass-border)]",
+                "opacity-0 group-hover/section:opacity-100 transition-all duration-200",
+                "hover:bg-[var(--glass-bg-hover)]"
               )}
             >
               <ChevronLeft size={16} className="text-[var(--color-text-primary)]" />
@@ -88,10 +88,10 @@ export function ProductSection({
               className={cn(
                 "absolute right-[-16px] top-1/2 -translate-y-1/2 z-10",
                 "w-[32px] h-[32px] rounded-full flex items-center justify-center",
-                "bg-[var(--color-surface)] shadow-[var(--shadow-md)]",
-                "border border-[var(--color-border)]",
-                "opacity-0 group-hover/section:opacity-100 transition-opacity",
-                "hover:bg-[var(--color-surface-subtle)]"
+                "bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)] shadow-[var(--glass-shadow)]",
+                "border border-[var(--glass-border)]",
+                "opacity-0 group-hover/section:opacity-100 transition-all duration-200",
+                "hover:bg-[var(--glass-bg-hover)]"
               )}
             >
               <ChevronRight size={16} className="text-[var(--color-text-primary)]" />

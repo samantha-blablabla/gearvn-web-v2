@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { CategoryMenuProvider } from "@/components/layout/CategoryMenuContext";
+import { CartProvider } from "@/components/layout/CartContext";
+import { CartPanel } from "@/components/cart/CartPanel";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -22,7 +25,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        <CartProvider>
+          <CategoryMenuProvider>{children}</CategoryMenuProvider>
+          <CartPanel />
+        </CartProvider>
+      </body>
     </html>
   );
 }

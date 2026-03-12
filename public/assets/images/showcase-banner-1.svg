@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="594" height="334" viewBox="0 0 594 334">
+  <defs>
+    <linearGradient id="sb1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff6b6b"/>
+      <stop offset="100%" stop-color="#ee5a24"/>
+    </linearGradient>
+  </defs>
+  <rect width="594" height="334" rx="12" fill="url(#sb1)"/>
+  <text x="297" y="160" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" font-weight="600" fill="#ffffff" opacity="0.7">Showcase Banner 1</text>
+  <text x="297" y="190" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#ffffff" opacity="0.5">594 × 334</text>
+</svg>
