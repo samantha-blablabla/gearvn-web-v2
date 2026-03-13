@@ -121,7 +121,7 @@ export function ProductTabSection({
             {/* Banner 1 — flex-1 stretches to fill sidebar */}
             <div className="relative flex-1 min-h-[564px] rounded-[8px] overflow-hidden bg-[var(--color-surface-muted)]">
               <Image
-                src="/assets/images/banners/product-tab-sidebar-1.jpg"
+                src="/assets/images/banners/product-tab-sidebar-1.svg"
                 alt="Build PC - Tặng màn OLED 240Hz khi mua PC GVN"
                 fill
                 className="object-cover"
@@ -131,7 +131,7 @@ export function ProductTabSection({
             {/* Banner 2 — flex-1 stretches to fill sidebar */}
             <div className="relative flex-1 min-h-[564px] rounded-[8px] overflow-hidden bg-[var(--color-surface-muted)]">
               <Image
-                src="/assets/images/banners/product-tab-sidebar-2.jpg"
+                src="/assets/images/banners/product-tab-sidebar-2.svg"
                 alt="Gaming accessories banner"
                 fill
                 className="object-cover"
@@ -144,13 +144,13 @@ export function ProductTabSection({
           <div className="flex flex-col gap-4 flex-1 min-w-0">
             {/* Tab bar */}
             <div className="border-b border-[#e5e5e5]">
-              <div className="flex">
+              <div className="flex overflow-x-auto scrollbar-hide">
                 {TABS.map((tab) => (
                   <button
                     key={tab.key}
                     onClick={() => handleTabChange(tab.key)}
                     className={cn(
-                      "flex-1 text-center pb-3 min-h-[44px] flex items-center justify-center text-[14px] md:text-[18px] leading-[22px] transition-colors",
+                      "shrink-0 w-[120px] lg:flex-1 lg:w-auto text-center pb-3 min-h-[44px] flex items-center justify-center text-[18px] leading-[22px] transition-colors",
                       activeTab === tab.key
                         ? "border-b-2 border-[var(--color-tab-active)] text-[var(--color-tab-active)] font-semibold -mb-px"
                         : "text-[#737373] font-medium opacity-30"

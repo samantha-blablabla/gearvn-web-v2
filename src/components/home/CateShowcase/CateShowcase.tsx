@@ -132,46 +132,46 @@ function CategorySubSection({
       <div className="flex flex-col gap-4 flex-1 min-w-0">
         {/* Title row */}
         <div className="flex items-center justify-between">
-          <h3 className="text-[18px] lg:text-[24px] font-semibold leading-[28px] text-[var(--color-text-figma-primary)]">
+          <h3 className="text-[18px] lg:text-[24px] font-semibold leading-[26px] lg:leading-[28px] text-[var(--color-text-figma-primary)]">
             {title}
           </h3>
           <Link
             href={href}
-            className="flex items-center gap-1 text-[14px] md:text-[16px] font-semibold leading-[22px] text-[var(--color-link)] hover:underline shrink-0"
+            className="hidden md:flex items-center gap-1 text-[16px] font-semibold leading-[22px] text-[var(--color-link)] hover:underline shrink-0"
           >
             Xem tất cả
             <ChevronRight size={20} />
           </Link>
         </div>
 
-        {/* Brand tabs + sort */}
-        <div className="flex items-center justify-between gap-3">
-          {/* Brand chips */}
-          <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 flex-1">
-            {brands.map((brand) => (
-              <button
-                key={brand}
-                onClick={() => setActiveBrand(brand)}
-                className={cn(
-                  "shrink-0 h-[46px] px-3 rounded-[8px] border border-[#e5e5e5]",
-                  "text-[14px] font-medium leading-[18px] text-[var(--color-text-figma-primary)] whitespace-nowrap",
-                  "transition-colors",
-                  activeBrand === brand
-                    ? "bg-[#fafafa] shadow-sm"
-                    : "bg-white hover:bg-[#f5f5f5]"
-                )}
-              >
-                {brand}
-              </button>
-            ))}
-          </div>
+        {/* Brand chips — horizontal scroll */}
+        <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
+          {brands.map((brand) => (
+            <button
+              key={brand}
+              onClick={() => setActiveBrand(brand)}
+              className={cn(
+                "shrink-0 h-[42px] md:h-[46px] px-3 rounded-[8px] border border-[#e5e5e5]",
+                "text-[14px] font-medium leading-[18px] text-[var(--color-text-figma-primary)] whitespace-nowrap",
+                "transition-colors",
+                activeBrand === brand
+                  ? "bg-[#fafafa] shadow-sm"
+                  : "bg-white hover:bg-[#f5f5f5]"
+              )}
+            >
+              {brand}
+            </button>
+          ))}
+        </div>
 
+        {/* Sort + Xem tất cả (mobile) */}
+        <div className="flex items-center justify-between">
           {/* Sort dropdown */}
-          <div ref={sortRef} className="hidden md:block relative shrink-0">
+          <div ref={sortRef} className="relative shrink-0">
             <button
               onClick={() => setSortOpen((v) => !v)}
               className={cn(
-                "flex items-center gap-2 h-[46px] w-[170px] px-3 bg-white border rounded-[8px] text-[14px] font-medium text-[var(--color-text-figma-primary)] transition-colors",
+                "flex items-center gap-2 h-[44px] md:h-[46px] w-[150px] md:w-[170px] px-3 bg-white border rounded-[8px] text-[14px] font-medium text-[var(--color-text-figma-primary)] transition-colors",
                 sortOpen ? "border-[var(--color-primary)] shadow-sm" : "border-[#e5e5e5]"
               )}
             >
@@ -182,7 +182,7 @@ function CategorySubSection({
             {sortOpen && (
               <>
                 <div className="fixed inset-0 z-20" onClick={() => setSortOpen(false)} />
-                <div className="absolute left-0 top-[calc(100%+4px)] z-30 w-[170px] bg-white border border-[#e5e5e5] rounded-[8px] shadow-[var(--shadow-md)] py-1 overflow-hidden">
+                <div className="absolute left-0 top-[calc(100%+4px)] z-30 w-[150px] md:w-[170px] bg-white border border-[#e5e5e5] rounded-[8px] shadow-[var(--shadow-md)] py-1 overflow-hidden">
                   {SORT_OPTIONS.map((option) => {
                     const Icon = option.icon;
                     return (
@@ -205,6 +205,15 @@ function CategorySubSection({
               </>
             )}
           </div>
+
+          {/* Xem tất cả — visible on mobile too */}
+          <Link
+            href={href}
+            className="flex items-center gap-1 text-[14px] md:text-[16px] font-semibold leading-[22px] text-[var(--color-link)] hover:underline shrink-0"
+          >
+            Xem tất cả
+            <ChevronRight size={18} className="md:size-[20px]" />
+          </Link>
         </div>
 
         {/* Product cards — horizontal scroll + nav arrows */}
@@ -226,11 +235,11 @@ function CategorySubSection({
 
           <div
             ref={scrollRef}
-            className="flex gap-1 overflow-x-auto scroll-smooth scrollbar-hide py-2 -my-2"
+            className="grid grid-rows-1 md:grid-rows-1 grid-flow-col gap-[8px] overflow-x-auto scroll-smooth scrollbar-hide py-2 -my-2 -mx-4 px-4 md:mx-0 md:px-0 auto-cols-[220px] md:auto-cols-[calc(33.333%-6px)] lg:auto-cols-[calc(25%-6px)]"
             style={{ scrollbarWidth: "none" }}
           >
             {products.map((product) => (
-              <div key={product.id} className="flex-shrink-0 w-[calc(50%-2px)] md:w-[calc(33.333%-3px)] lg:w-[calc(25%-3px)]">
+              <div key={product.id}>
                 <ProductCard product={product} />
               </div>
             ))}
@@ -267,9 +276,9 @@ export function CateShowcase({
     >
       <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px]">
         <div className="flex flex-col gap-8">
-          {/* Top banners */}
+          {/* Top banners — mobile: single banner carousel, desktop: 2 side-by-side */}
           <div className="flex flex-col md:flex-row gap-3">
-            <div className="relative flex-1 h-[140px] md:h-[200px] lg:h-[334px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)]">
+            <div className="relative flex-1 h-[193px] md:h-[200px] lg:h-[334px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)]">
               <Image
                 src="/assets/images/showcase-banner-1.svg"
                 alt="Banner khuyến mãi 1"
@@ -278,13 +287,13 @@ export function CateShowcase({
                 sizes="(max-width: 768px) 100vw, 594px"
               />
             </div>
-            <div className="relative flex-1 h-[140px] md:h-[200px] lg:h-[334px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)]">
+            <div className="hidden md:block relative flex-1 h-[200px] lg:h-[334px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)]">
               <Image
                 src="/assets/images/showcase-banner-2.svg"
                 alt="Banner khuyến mãi 2"
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 594px"
+                sizes="594px"
               />
             </div>
           </div>
@@ -295,7 +304,7 @@ export function CateShowcase({
             href="/chuot"
             brands={MOUSE_BRANDS}
             products={mouseProducts ?? DEMO_PRODUCTS}
-            sidebarImageSrc="/assets/images/sidebar-mouse.jpg"
+            sidebarImageSrc="/assets/images/sidebar-mouse.svg"
             sidebarImageAlt="Chuột gaming banner"
           />
 
@@ -305,7 +314,7 @@ export function CateShowcase({
             href="/laptop"
             brands={LAPTOP_BRANDS}
             products={laptopProducts ?? DEMO_LAPTOP_PRODUCTS}
-            sidebarImageSrc="/assets/images/sidebar-laptop.jpg"
+            sidebarImageSrc="/assets/images/sidebar-laptop.svg"
             sidebarImageAlt="Laptop banner"
           />
         </div>

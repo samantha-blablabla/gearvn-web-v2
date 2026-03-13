@@ -19,6 +19,7 @@
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* overflow contained by main/footer, not body — keeps sticky navbar working */
   }
 
   /* Hide scrollbar for product carousels */

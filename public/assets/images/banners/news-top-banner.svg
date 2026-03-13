@@ -1,0 +1,12 @@
+<svg width="1200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="newsBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a2e"/>
+      <stop offset="50%" stop-color="#1a1a4e"/>
+      <stop offset="100%" stop-color="#0a0a2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="200" fill="url(#newsBg)" rx="12"/>
+  <text x="600" y="80" text-anchor="middle" font-family="Inter, sans-serif" font-size="32" font-weight="700" fill="white">Cập nhật Tin Tức Công Nghệ</text>
+  <text x="600" y="120" text-anchor="middle" font-family="Inter, sans-serif" font-size="32" font-weight="700" fill="white">mới nhất cùng Gearvn</text>
+</svg>

@@ -42,20 +42,59 @@ const DEFAULT_RECENT: NewsArticle[] = [
   },
 ];
 
+// ── Shared ThumbNews card for mobile horizontal scroll ──────────────────────
+function ThumbNewsCard({
+  article,
+  height = "h-[169px]",
+}: {
+  article: NewsArticle;
+  height?: string;
+}) {
+  return (
+    <Link
+      href={article.href}
+      className={cn(
+        "relative shrink-0 w-[300px] rounded-[16px] overflow-hidden block group",
+        height
+      )}
+    >
+      <Image
+        src={article.imageUrl}
+        alt={article.title}
+        fill
+        className="object-cover transition-transform duration-300 group-hover:scale-105"
+        sizes="300px"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+
+      <div className="absolute bottom-0 left-0 right-0 pb-[12px] px-[16px]">
+        <div className="bg-[rgba(0,0,0,0.1)] rounded-[12px] p-[12px] flex items-center gap-3 backdrop-blur-sm">
+          <h3 className="text-[14px] font-semibold leading-[20px] tracking-[-0.28px] text-white line-clamp-2 flex-1 min-w-0">
+            {article.title}
+          </h3>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export function NewsSection({
   featuredArticle = DEFAULT_FEATURED,
   recentArticles = DEFAULT_RECENT,
   className,
 }: NewsSectionProps) {
+  // All articles combined for mobile "Tin Tức Nổi Bật" row
+  const allFeatured = [featuredArticle, ...recentArticles.slice(0, 1)];
+
   return (
     <section
-      className={cn("bg-[var(--color-surface-subtle)] py-8 lg:py-[32px]", className)}
+      className={cn("bg-[var(--color-surface-subtle)] py-[16px] lg:py-[32px]", className)}
     >
-      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px] flex flex-col gap-8">
-        {/* Top banner */}
+      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px] flex flex-col gap-[24px] lg:gap-8">
+        {/* Top banner — desktop only (hidden on mobile per Figma) */}
         <Link
           href="/tin-tuc"
-          className="relative w-full h-[120px] md:h-[200px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)] block group"
+          className="relative w-full h-[200px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)] hidden lg:block group"
         >
           <Image
             src="/assets/images/banners/news-top-banner.png"
@@ -66,42 +105,67 @@ export function NewsSection({
           />
         </Link>
 
-        {/* News grid */}
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-[24px] items-start">
+        {/* ── MOBILE layout: Two horizontal scroll rows ── */}
+        <div className="flex flex-col gap-[24px] lg:hidden">
+          {/* Tin Tức Nổi Bật — horizontal scroll */}
+          <div className="flex flex-col gap-[16px]">
+            <h2 className="text-[20px] font-semibold leading-[26px] text-[var(--color-text-figma-primary)]">
+              Tin Tức Nổi Bật
+            </h2>
+            <div className="flex gap-[12px] overflow-x-auto scrollbar-hide -mx-4 px-4">
+              {allFeatured.map((article) => (
+                <ThumbNewsCard key={article.id} article={article} height="h-[169px]" />
+              ))}
+            </div>
+          </div>
+
+          {/* Bài Viết Mới — horizontal scroll */}
+          <div className="flex flex-col gap-[16px]">
+            <h2 className="text-[20px] font-semibold leading-[26px] text-[var(--color-text-figma-primary)]">
+              Bài Viết Mới
+            </h2>
+            <div className="flex gap-[12px] overflow-x-auto scrollbar-hide -mx-4 px-4">
+              {recentArticles.map((article) => (
+                <ThumbNewsCard key={article.id} article={article} height="h-[168px]" />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── DESKTOP layout: Featured article + sidebar ── */}
+        <div className="hidden lg:flex lg:flex-row gap-[24px] items-start">
           {/* Left: Tin Tức Nổi Bật */}
           <div className="flex flex-col gap-[16px] flex-1 min-w-0">
-            <h2 className="text-[20px] lg:text-[24px] font-semibold leading-[28px] text-[var(--color-text-figma-primary)]">
+            <h2 className="text-[24px] font-semibold leading-[28px] text-[var(--color-text-figma-primary)]">
               Tin Tức Nổi Bật
             </h2>
 
             <Link
               href={featuredArticle.href}
-              className="relative w-full h-[280px] lg:h-[444px] rounded-[16px] overflow-hidden block group"
+              className="relative w-full h-[444px] rounded-[16px] overflow-hidden block group"
             >
               <Image
                 src={featuredArticle.imageUrl}
                 alt={featuredArticle.title}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 1024px) 100vw, 790px"
+                sizes="790px"
               />
-              {/* Dark gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-              {/* Glass info overlay */}
-              <div className="absolute bottom-0 left-0 right-0 pb-6 px-4 lg:px-[32px]">
-                <div className="bg-[rgba(0,0,0,0.1)] rounded-[16px] px-4 lg:px-[32px] py-4 lg:py-[24px] flex items-start justify-between gap-4 backdrop-blur-sm">
+              <div className="absolute bottom-0 left-0 right-0 pb-6 px-[32px]">
+                <div className="bg-[rgba(0,0,0,0.1)] rounded-[16px] px-[32px] py-[24px] flex items-start justify-between gap-4 backdrop-blur-sm">
                   <div className="flex flex-col gap-3 flex-1 min-w-0">
                     {featuredArticle.tag && (
                       <span className="inline-flex bg-[var(--color-surface-subtle)] rounded-full px-[6px] py-[2px] text-[12px] font-semibold leading-[16px] text-[var(--color-text-figma-primary)] w-fit">
                         {featuredArticle.tag}
                       </span>
                     )}
-                    <h3 className="text-[18px] lg:text-[24px] font-semibold leading-[28px] text-white line-clamp-2">
+                    <h3 className="text-[24px] font-semibold leading-[28px] text-white line-clamp-2">
                       {featuredArticle.title}
                     </h3>
                     {featuredArticle.excerpt && (
-                      <p className="text-[13px] font-medium leading-[18px] text-[#e5e5e5] line-clamp-3 hidden lg:block">
+                      <p className="text-[13px] font-medium leading-[18px] text-[#e5e5e5] line-clamp-3">
                         {featuredArticle.excerpt}
                       </p>
                     )}
@@ -115,8 +179,8 @@ export function NewsSection({
           </div>
 
           {/* Right: Bài Viết Mới */}
-          <div className="flex flex-col gap-[16px] lg:w-[374px] shrink-0">
-            <h2 className="text-[20px] lg:text-[24px] font-semibold leading-[28px] text-[var(--color-text-figma-primary)]">
+          <div className="flex flex-col gap-[16px] w-[374px] shrink-0">
+            <h2 className="text-[24px] font-semibold leading-[28px] text-[var(--color-text-figma-primary)]">
               Bài Viết Mới
             </h2>
 
@@ -125,14 +189,14 @@ export function NewsSection({
                 <Link
                   key={article.id}
                   href={article.href}
-                  className="relative w-full h-[180px] lg:h-[210px] rounded-[16px] overflow-hidden block group"
+                  className="relative w-full h-[210px] rounded-[16px] overflow-hidden block group"
                 >
                   <Image
                     src={article.imageUrl}
                     alt={article.title}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 374px"
+                    sizes="374px"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 

@@ -95,7 +95,7 @@ export default function HomePage() {
       <Navbar />
       <CategoryTabs />
 
-      <main>
+      <main className="overflow-x-hidden">
         {/* Hero: sidebar menu + banners */}
         <HeroBanner />
 

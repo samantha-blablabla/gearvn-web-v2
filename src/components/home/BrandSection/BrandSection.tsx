@@ -14,18 +14,18 @@ interface BrandItem {
 }
 
 const BRANDS: BrandItem[] = [
-  { name: "ASUS", slug: "asus", logoUrl: "/assets/images/brands/asus.png" },
-  { name: "Acer", slug: "acer", logoUrl: "/assets/images/brands/acer.png" },
-  { name: "MSI", slug: "msi", logoUrl: "/assets/images/brands/msi.png" },
-  { name: "Razer", slug: "razer", logoUrl: "/assets/images/brands/razer.png" },
-  { name: "GIGABYTE", slug: "gigabyte", logoUrl: "/assets/images/brands/gigabyte.png" },
-  { name: "Lenovo", slug: "lenovo", logoUrl: "/assets/images/brands/lenovo.png" },
-  { name: "ViewSonic", slug: "viewsonic", logoUrl: "/assets/images/brands/viewsonic.png" },
-  { name: "Corsair", slug: "corsair", logoUrl: "/assets/images/brands/corsair.png" },
-  { name: "Logitech", slug: "logitech", logoUrl: "/assets/images/brands/logitech.png" },
-  { name: "Akko", slug: "akko", logoUrl: "/assets/images/brands/akko.png" },
-  { name: "EDRA", slug: "edra", logoUrl: "/assets/images/brands/edra.png" },
-  { name: "SteelSeries", slug: "steelseries", logoUrl: "/assets/images/brands/steelseries.png" },
+  { name: "ASUS", slug: "asus", logoUrl: "/assets/images/brands/asus.svg" },
+  { name: "Acer", slug: "acer", logoUrl: "/assets/images/brands/acer.svg" },
+  { name: "MSI", slug: "msi", logoUrl: "/assets/images/brands/msi.svg" },
+  { name: "Razer", slug: "razer", logoUrl: "/assets/images/brands/razer.svg" },
+  { name: "GIGABYTE", slug: "gigabyte", logoUrl: "/assets/images/brands/gigabyte.svg" },
+  { name: "Lenovo", slug: "lenovo", logoUrl: "/assets/images/brands/lenovo.svg" },
+  { name: "ViewSonic", slug: "viewsonic", logoUrl: "/assets/images/brands/viewsonic.svg" },
+  { name: "Corsair", slug: "corsair", logoUrl: "/assets/images/brands/corsair.svg" },
+  { name: "Logitech", slug: "logitech", logoUrl: "/assets/images/brands/logitech.svg" },
+  { name: "Akko", slug: "akko", logoUrl: "/assets/images/brands/akko.svg" },
+  { name: "EDRA", slug: "edra", logoUrl: "/assets/images/brands/edra.svg" },
+  { name: "SteelSeries", slug: "steelseries", logoUrl: "/assets/images/brands/steelseries.svg" },
 ];
 
 export function BrandSection({ className }: BrandSectionProps) {
@@ -36,9 +36,9 @@ export function BrandSection({ className }: BrandSectionProps) {
       <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px]">
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-4 items-start">
           {/* ── Left Banner ── */}
-          <div className="relative w-full lg:w-[478px] lg:shrink-0 h-[160px] lg:h-[239px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)]">
+          <div className="relative w-full lg:w-[478px] lg:shrink-0 h-[172px] lg:h-[239px] rounded-[12px] overflow-hidden bg-[var(--color-surface-muted)]">
             <Image
-              src="/assets/images/banners/brand-main-1.jpg"
+              src="/assets/images/banners/brand-main-1.svg"
               alt="Danh mục hãng"
               fill
               className="object-cover"
@@ -54,9 +54,9 @@ export function BrandSection({ className }: BrandSectionProps) {
           </div>
 
           {/* ── Right Panel ── */}
-          <div className="flex flex-col gap-4 flex-1 min-w-0">
+          <div className="flex flex-col gap-3 lg:gap-4 flex-1 min-w-0">
             {/* Title */}
-            <h2 className="text-[20px] lg:text-[24px] font-semibold leading-[28px] text-[var(--color-text-figma-primary)]">
+            <h2 className="text-[20px] lg:text-[24px] font-semibold leading-[26px] text-[var(--color-text-figma-primary)]">
               Danh Mục Hãng
             </h2>
 
@@ -70,8 +70,33 @@ export function BrandSection({ className }: BrandSectionProps) {
                 <ChevronLeft size={20} />
               </button>
 
-              {/* Grid: 2 cols mobile, 4 cols desktop */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {/* Mobile: horizontal scroll grid 3 rows × N cols */}
+              <div className="grid grid-rows-3 grid-flow-col gap-2 overflow-x-auto scrollbar-hide -mx-4 px-4 md:hidden">
+                {BRANDS.map((brand) => (
+                  <Link
+                    key={brand.slug}
+                    href={`/hang/${brand.slug}`}
+                    className={cn(
+                      "flex items-center justify-center shrink-0",
+                      "w-[200px] h-[60px] bg-[var(--color-surface)] border border-[#e5e5e5] rounded-[8px] p-2",
+                      "overflow-hidden"
+                    )}
+                  >
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={brand.logoUrl}
+                        alt={brand.name}
+                        fill
+                        className="object-contain"
+                        sizes="200px"
+                      />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Desktop/Tablet: 4-col grid */}
+              <div className="hidden md:grid grid-cols-4 gap-2">
                 {BRANDS.map((brand) => (
                   <Link
                     key={brand.slug}
@@ -88,7 +113,7 @@ export function BrandSection({ className }: BrandSectionProps) {
                         alt={brand.name}
                         fill
                         className="object-contain"
-                        sizes="(max-width: 768px) calc(50vw - 24px), 184px"
+                        sizes="184px"
                       />
                     </div>
                   </Link>

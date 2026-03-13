@@ -261,7 +261,7 @@ export function HeroBanner({ className }: HeroBannerProps) {
           </div>
 
           {/* ── Right: Policy banners — desktop/tablet column ── */}
-          <div className="hidden md:flex flex-col gap-[8px] w-[140px] lg:flex-1 lg:w-auto md:h-[508px] lg:h-[616px]">
+          <div className="hidden md:flex flex-col gap-[8px] w-[140px] lg:w-[300px] shrink-0 md:h-[508px] lg:h-[616px]">
             {rightBanners.map((banner, i) => (
               <div
                 key={i}

@@ -181,12 +181,12 @@ export function ReviewSection({
 
   return (
     <section
-      className={cn("bg-[var(--color-surface-subtle)] pt-8 pb-12 lg:pt-[32px] lg:pb-[48px]", className)}
+      className={cn("bg-[var(--color-surface-subtle)] pt-[16px] pb-[32px] lg:pt-[32px] lg:pb-[48px]", className)}
     >
-      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px] flex flex-col gap-8">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[120px] flex flex-col gap-[24px] lg:gap-8">
         {/* ── Góc Review Thực Tế ── */}
-        <div className="flex flex-col gap-4 py-6 rounded-[24px]">
-          <h2 className="text-[20px] lg:text-[24px] font-semibold leading-[28px] text-[var(--color-text-figma-primary)]">
+        <div className="flex flex-col gap-[16px] rounded-[24px]">
+          <h2 className="text-[20px] lg:text-[24px] font-semibold leading-[26px] lg:leading-[28px] text-[var(--color-text-figma-primary)]">
             Góc Review Thực Tế
           </h2>
 
@@ -196,13 +196,13 @@ export function ReviewSection({
             <div
               ref={review.ref}
               onScroll={review.handleScroll}
-              className="flex gap-6 overflow-x-auto scrollbar-hide pb-2"
+              className="flex gap-[12px] lg:gap-6 overflow-x-auto scrollbar-hide pb-2 -mx-4 px-4 md:mx-0 md:px-0"
             >
               {reviewItems.map((card, idx) => (
                 <Link
                   key={`${card.id}-${idx}`}
                   href={card.href}
-                  className="shrink-0 flex flex-col rounded-[12px] overflow-hidden bg-white border border-[#e5e5e5] hover:shadow-md transition-shadow w-[calc(50vw-24px)] md:w-[244px]"
+                  className="shrink-0 flex flex-col rounded-[12px] overflow-hidden bg-white border border-[#e5e5e5] hover:shadow-md transition-shadow w-[244px]"
                 >
                   <div className="relative w-full aspect-[244/433] bg-[#e5e5e5]">
                     <Image
@@ -210,17 +210,19 @@ export function ReviewSection({
                       alt={card.title}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) calc(50vw - 24px), 244px"
+                      sizes="244px"
                     />
                   </div>
 
-                  <div className="flex flex-col gap-2 items-center p-2 bg-white">
-                    <h3 className="text-[14px] lg:text-[18px] font-semibold leading-[22px] text-[var(--color-text-figma-primary)] line-clamp-2 text-center px-2 w-full">
-                      {card.title}
-                    </h3>
+                  <div className="flex flex-col gap-[8px] items-center p-[8px] bg-white">
+                    <div className="w-full px-[8px]">
+                      <h3 className="text-[16px] font-semibold leading-[20px] tracking-[-0.32px] text-[var(--color-text-figma-primary)] line-clamp-2 h-[50px] overflow-hidden">
+                        {card.title}
+                      </h3>
+                    </div>
 
                     {card.product && (
-                      <div className="w-full border border-[#e5e5e5] rounded-[12px] flex items-center gap-1 pl-1 pr-2 py-3">
+                      <div className="w-[225px] h-[113px] border border-[#e5e5e5] rounded-[12px] flex items-center gap-[4px] pl-[4px] pr-[8px] py-[12px]">
                         <div className="relative size-[88px] shrink-0">
                           <Image
                             src={card.product.imageUrl ?? "/assets/images/placeholder-product.svg"}
@@ -230,18 +232,20 @@ export function ReviewSection({
                             sizes="88px"
                           />
                         </div>
-                        <div className="flex flex-col gap-1 min-w-0 flex-1">
-                          <p className="text-[11px] font-medium leading-[14px] text-[var(--color-text-figma-primary)] line-clamp-2">
+                        <div className="flex flex-col gap-[8px] min-w-0 flex-1 pr-[4px]">
+                          <p className="text-[11px] font-medium leading-[14px] text-[var(--color-text-figma-primary)] line-clamp-2 h-[32px] overflow-hidden">
                             {card.product.name}
                           </p>
-                          {card.product.originalPrice && (
-                            <span className="text-[12px] leading-[16px] text-[#737373] line-through">
-                              {formatVND(card.product.originalPrice)}
+                          <div className="flex flex-col">
+                            {card.product.originalPrice && (
+                              <span className="text-[12px] leading-[16px] text-[#737373] line-through">
+                                {formatVND(card.product.originalPrice)}
+                              </span>
+                            )}
+                            <span className="text-[16px] font-semibold leading-[20px] tracking-[-0.32px] text-[var(--color-flash-price-sale)]">
+                              {formatVND(card.product.price)}
                             </span>
-                          )}
-                          <span className="text-[16px] font-semibold leading-[20px] tracking-[-0.32px] text-[var(--color-flash-price-sale)]">
-                            {formatVND(card.product.price)}
-                          </span>
+                          </div>
                         </div>
                       </div>
                     )}
@@ -255,19 +259,19 @@ export function ReviewSection({
         </div>
 
         {/* ── Video Review Sản Phẩm ── */}
-        <div className="flex flex-col gap-4 rounded-[24px]">
+        <div className="flex flex-col gap-[16px] rounded-[12px] lg:rounded-[24px]">
           <div className="flex items-center justify-between">
-            <h2 className="text-[20px] lg:text-[24px] font-semibold leading-[28px] text-[var(--color-text-figma-primary)]">
+            <h2 className="text-[20px] lg:text-[24px] font-semibold leading-[26px] lg:leading-[28px] text-[var(--color-text-figma-primary)]">
               Video Review Sản Phẩm
             </h2>
             <Link
               href="https://www.youtube.com/@gearvn"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-[16px] font-semibold leading-[22px] text-[var(--color-link)] hover:underline shrink-0"
+              className="flex items-center gap-1 lg:gap-2 text-[14px] md:text-[16px] font-semibold leading-[22px] text-[var(--color-link)] hover:underline shrink-0"
             >
               Xem Youtube
-              <ChevronRight size={20} />
+              <ChevronRight size={18} className="md:size-[20px]" />
             </Link>
           </div>
 
@@ -277,7 +281,7 @@ export function ReviewSection({
             <div
               ref={video.ref}
               onScroll={video.handleScroll}
-              className="flex gap-6 overflow-x-auto scrollbar-hide pb-2"
+              className="flex gap-[12px] lg:gap-6 overflow-x-auto scrollbar-hide pb-2 -mx-4 px-4 md:mx-0 md:px-0"
             >
               {videoItems.map((v, idx) => (
                 <Link
@@ -286,7 +290,7 @@ export function ReviewSection({
                   className={cn(
                     "shrink-0 flex flex-col rounded-[12px] overflow-hidden bg-white border border-[#e5e5e5]",
                     "hover:shadow-md transition-shadow",
-                    "w-[calc(50vw-24px)] md:w-[319px]"
+                    "w-[244px] lg:w-[319px]"
                   )}
                 >
                   <div className="relative w-full aspect-video bg-[#e5e5e5]">
@@ -295,17 +299,17 @@ export function ReviewSection({
                       alt={v.title}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) calc(50vw - 24px), 319px"
+                      sizes="(max-width: 1024px) 244px, 319px"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="size-[48px] rounded-full bg-[rgba(0,0,0,0.5)] flex items-center justify-center">
-                        <div className="w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-l-[18px] border-l-white ml-1" />
+                      <div className="size-[40px] lg:size-[48px] rounded-full bg-[rgba(0,0,0,0.5)] flex items-center justify-center">
+                        <div className="w-0 h-0 border-t-[8px] lg:border-t-[10px] border-t-transparent border-b-[8px] lg:border-b-[10px] border-b-transparent border-l-[14px] lg:border-l-[18px] border-l-white ml-1" />
                       </div>
                     </div>
                   </div>
 
-                  <div className="h-[74px] p-3 bg-white">
-                    <p className="text-[16px] font-medium leading-[20px] text-[var(--color-text-figma-primary)] line-clamp-2">
+                  <div className="h-[74px] p-[12px] bg-white">
+                    <p className="text-[14px] lg:text-[16px] font-medium leading-[18px] lg:leading-[20px] text-[var(--color-text-figma-primary)] line-clamp-2">
                       {v.title}
                     </p>
                   </div>
